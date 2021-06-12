@@ -1,0 +1,45 @@
+{
+  "name": "forkify",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "serve": "parcel serve index.html",
+    "build": "parcel build index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CaptKraken/forkify.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CaptKraken/forkify/issues"
+  },
+  "homepage": "https://github.com/CaptKraken/forkify#readme",
+  "dependencies": {
+    "core-js": "^3.14.0",
+    "parcel": "^2.0.0-beta.2",
+    "parcel-plugin-structurize": "^2.4.4",
+    "regenerator-runtime": "^0.13.7"
+  },
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.0.0-beta.2"
+  },
+  "parcel-plugin-structurize": {
+    "rules": [
+        {
+            "match": "*.js",
+            "folder": "scripts"
+        },
+        {
+            "match": "*.css",
+            "folder": "css"
+        },
+        {
+            "match": "*.{jpg,png,gif,svg}",
+            "folder": "images"
+        }
+    ]
+}
+}

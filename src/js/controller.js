@@ -1,6 +1,6 @@
-import icons from "url:../img/icons.svg";
-//import 'core-js/stable';
-//import 'regenerator-runtime/runtime';
+import "core-js/stable";
+import "regenerator-runtime/runtime";
+import icons from "../img/icons.svg";
 // import { slice } from 'core-js/core/array';
 
 const recipeContainer = document.querySelector(".recipe");
