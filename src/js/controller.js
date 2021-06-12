@@ -1,6 +1,7 @@
+import icons from "../img/icons.svg";
+console.log(icons);
 import "core-js/stable";
 import "regenerator-runtime/runtime";
-import icons from "../img/icons.svg";
 // import { slice } from 'core-js/core/array';
 
 const recipeContainer = document.querySelector(".recipe");
@@ -170,4 +171,6 @@ const showRecipe = async function () {
 
 showRecipe();
 
-["hashchange", "load"].forEach((e) => window.addEventListener(e, showRecipe));
+// ["hashchange", "load"].forEach((e) => window.addEventListener(e, showRecipe));
+window.addEventListener("hashchange", showRecipe);
+window.addEventListener("load", showRecipe);
