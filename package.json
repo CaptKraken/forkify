@@ -19,27 +19,27 @@
   "homepage": "https://github.com/CaptKraken/forkify#readme",
   "dependencies": {
     "core-js": "^3.14.0",
-    "parcel": "^2.0.0-beta.1",
+    "parcel": "^2.0.0-nightly.718",
     "parcel-bundler": "^1.12.5",
     "parcel-plugin-structurize": "^2.4.4",
     "regenerator-runtime": "^0.13.7"
   },
   "devDependencies": {
-    "@parcel/transformer-sass": "^2.0.0-beta.2"
+    "@parcel/transformer-sass": "^2.0.0-nightly.720"
   },
   "parcel-plugin-structurize": {
     "rules": [
       {
         "match": "*.js",
-        "folder": "scripts"
+        "folder": "src/scripts"
       },
       {
         "match": "*.css",
-        "folder": "css"
+        "folder": "src/css"
       },
       {
         "match": "*.{jpg,png,gif,svg}",
-        "folder": "images"
+        "folder": "src/images"
       }
     ]
   }
