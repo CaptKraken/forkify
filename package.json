@@ -19,10 +19,7 @@
   "homepage": "https://github.com/CaptKraken/forkify#readme",
   "dependencies": {
     "core-js": "^3.14.0",
-    "parcel": "^2.0.0-nightly.718",
+    "parcel": "^2.0.0-beta.3.1",
     "regenerator-runtime": "^0.13.7"
-  },
-  "devDependencies": {
-    "@parcel/transformer-sass": "^2.0.0-nightly.720"
   }
 }

@@ -1,10 +1,9 @@
-import icons from "../images/icons.svg";
-console.log(icons);
-import "core-js/stable";
-import "regenerator-runtime/runtime";
+import icons from '../images/icons.svg';
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
 // import { slice } from 'core-js/core/array';
 
-const recipeContainer = document.querySelector(".recipe");
+const recipeContainer = document.querySelector('.recipe');
 
 const timeout = function (s) {
   return new Promise(function (_, reject) {
@@ -26,8 +25,8 @@ const renderSpinner = function (parentEl) {
     </svg>
   </div>
 `;
-  parentEl.innerHTML = "";
-  parentEl.insertAdjacentHTML("afterbegin", markup);
+  parentEl.innerHTML = '';
+  parentEl.insertAdjacentHTML('afterbegin', markup);
 };
 
 //TODO: refactor this whole thing later
@@ -120,8 +119,8 @@ const showRecipe = async function () {
         .map((ingredient) => {
           //some guard clauses
           if (!ingredient.description) return;
-          if (!ingredient.quantity) ingredient.quantity = "";
-          if (!ingredient.unit) ingredient.unit = "";
+          if (!ingredient.quantity) ingredient.quantity = '';
+          if (!ingredient.unit) ingredient.unit = '';
 
           return `
         <li class="recipe__ingredient">
@@ -136,7 +135,7 @@ const showRecipe = async function () {
         </li>
       `;
         })
-        .join("")}
+        .join('')}
           
       </ul>
     </div>
@@ -162,8 +161,8 @@ const showRecipe = async function () {
       </a>
     </div>
   `;
-    recipeContainer.innerHTML = ""; //removes the message
-    recipeContainer.insertAdjacentHTML("afterbegin", markup);
+    recipeContainer.innerHTML = ''; //removes the message
+    recipeContainer.insertAdjacentHTML('afterbegin', markup);
   } catch (err) {
     alert(err);
   }
@@ -172,5 +171,5 @@ const showRecipe = async function () {
 showRecipe();
 
 // ["hashchange", "load"].forEach((e) => window.addEventListener(e, showRecipe));
-window.addEventListener("hashchange", showRecipe);
-window.addEventListener("load", showRecipe);
+window.addEventListener('hashchange', showRecipe);
+window.addEventListener('load', showRecipe);
