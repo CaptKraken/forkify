@@ -20,6 +20,7 @@
   "dependencies": {
     "core-js": "^3.14.0",
     "parcel": "^2.0.0-beta.1",
+    "parcel-bundler": "^1.12.5",
     "parcel-plugin-structurize": "^2.4.4",
     "regenerator-runtime": "^0.13.7"
   },
@@ -28,18 +29,18 @@
   },
   "parcel-plugin-structurize": {
     "rules": [
-        {
-            "match": "*.js",
-            "folder": "scripts"
-        },
-        {
-            "match": "*.css",
-            "folder": "css"
-        },
-        {
-            "match": "*.{jpg,png,gif,svg}",
-            "folder": "images"
-        }
+      {
+        "match": "*.js",
+        "folder": "scripts"
+      },
+      {
+        "match": "*.css",
+        "folder": "css"
+      },
+      {
+        "match": "*.{jpg,png,gif,svg}",
+        "folder": "images"
+      }
     ]
-}
+  }
 }
