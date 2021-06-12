@@ -1,4 +1,4 @@
-import icons from '../images/icons.svg';
+import icons from 'url:../images/icons.svg';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 // import { slice } from 'core-js/core/array';
