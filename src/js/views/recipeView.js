@@ -5,6 +5,8 @@ class RecipeView {
   #parentElement = document.querySelector(".recipe");
   #data;
   render(data) {
+    // console.log(data);
+    if (JSON.stringify(data) === "{}") return;
     this.#data = data;
     const markup = this.#generateMarkup();
     this.#clear();
