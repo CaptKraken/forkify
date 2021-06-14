@@ -25,11 +25,10 @@ const recipeContainer = document.querySelector(".recipe");
 // 156b8c38-4dae-4e72-bc6f-43025b8945e0
 ///////////////////////////////////////
 
-//TODO: refactor this whole thing later
-const showRecipe = async function () {
+const controlRecipe = async function () {
   try {
     const recipeID = window.location.hash.slice(1);
-    if (!recipeID) return; //no id => show message
+    if (!recipeID) return; //no id
 
     recipeView.renderSpinner(recipeContainer);
     //loading recipe
@@ -41,8 +40,10 @@ const showRecipe = async function () {
   }
 };
 
-showRecipe();
+controlRecipe();
 
-["hashchange", "load"].forEach((e) => {
-  window.addEventListener(e, showRecipe);
-});
+const init = function () {
+  recipeView.addHandlerRender(controlRecipe);
+};
+
+init();
