@@ -1,6 +1,7 @@
 import * as model from "../js/model.js";
 import recipeView from "./views/recipeView.js";
 import searchView from "./views/searchView.js";
+import resultsView from "./views/resultsView.js";
 
 import "core-js/stable";
 import "regenerator-runtime/runtime";
@@ -13,12 +14,16 @@ const searchInput = document.querySelector(".search__field");
 // 156b8c38-4dae-4e72-bc6f-43025b8945e0
 ///////////////////////////////////////
 
+if (module.hot) {
+  module.hot.accept();
+}
+
 const controlRecipe = async function () {
   try {
     const recipeID = window.location.hash.slice(1);
     if (!recipeID) return; //no id
 
-    recipeView.renderSpinner(recipeContainer);
+    recipeView.renderSpinner();
     //loading recipe
     await model.loadRecipe(recipeID);
     //rendering recipe
@@ -33,6 +38,8 @@ controlRecipe();
 
 const controlSearchResults = async function () {
   try {
+    resultsView.renderSpinner();
+
     //get search query from the search input
     const query = searchView.getQuery();
     if (!query) return; //guard clause
@@ -40,7 +47,8 @@ const controlSearchResults = async function () {
     //load search recipe
     await model.loadSearchResult(query);
 
-    console.log(model.state.search.results);
+    //render results
+    resultsView.render(model.state.search.results);
   } catch (error) {}
 };
 

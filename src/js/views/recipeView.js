@@ -2,64 +2,10 @@ import View from "./View";
 import icons from "url:../../images/icons.svg";
 import { Fraction } from "fractional";
 
-class RecipeView {
-  _parentElement = document.querySelector(".recipe");
-  _data;
+class RecipeView extends View {
+  _parentEl = document.querySelector(".recipe");
   _errorMessage = `We couldn't find that recipe. Please try another one!`;
   _message = "";
-  render(data) {
-    // console.log(data);
-    if (JSON.stringify(data) === "{}") return;
-    this._data = data;
-    const markup = this._generateMarkup();
-    this._clear();
-    this._addToParentEl(markup);
-  }
-
-  renderError(message = this._errorMessage) {
-    const markup = `
-    <div class="error">
-      <div>
-        <svg>
-          <use href="${icons}#icon-alert-triangle"></use>
-        </svg>
-      </div>
-      <p>${message}</p>
-    </div>`;
-    this._clear();
-    this._addToParentEl(markup);
-  }
-  renderMessage(message = this._message) {
-    const markup = `
-    <div class="message">
-          <div>
-            <svg>
-              <use href="${icons}#icon-smile"></use>
-            </svg>
-          </div>
-          <p>${message}</p>
-    </div>`;
-    this._clear();
-    this._addToParentEl(markup);
-  }
-
-  renderSpinner(parentEl) {
-    const markup = `
-    <div class="spinner">
-      <svg>
-        <use href="${icons}#icon-loader"></use>
-      </svg>
-    </div>
-  `;
-    this._clear();
-  }
-
-  _clear() {
-    this._parentElement.innerHTML = ""; //removes the message
-  }
-  _addToParentEl(markup) {
-    this._parentElement.insertAdjacentHTML("afterbegin", markup);
-  }
 
   addHandlerRender(handler) {
     ["hashchange", "load"].forEach((e) => window.addEventListener(e, handler));
@@ -109,9 +55,9 @@ class RecipeView {
         </div>
         </div>
 
-        <div class="recipe__user-generated">
+        <div class="recipe__user-generated recipe__user-generated-no">
         <svg>
-            <use href="${icons}#icon-user"></use>
+        <use href="${icons}#icon-user"></use>
         </svg>
         </div>
         <button class="btn--round">
@@ -155,7 +101,6 @@ class RecipeView {
   }
   _generateIngredient(ingredient) {
     if (!ingredient.description) return;
-    if (!ingredient.quantity) ingredient.quantity = "";
     if (!ingredient.unit) ingredient.unit = "";
 
     return `
@@ -163,9 +108,11 @@ class RecipeView {
         <svg class="recipe__icon">
             <use href="${icons}#icon-check"></use>
         </svg>
-        <div class="recipe__quantity">${new Fraction(
-          ingredient.quantity
-        ).toString()}</div>
+        <div class="recipe__quantity">${
+          !ingredient.quantity
+            ? (ingredient.quantity = "")
+            : new Fraction(ingredient.quantity).toString()
+        }</div>
         <div class="recipe__description">
         <span class="recipe__unit">${ingredient.unit}</span>
         ${ingredient.description}
