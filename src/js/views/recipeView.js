@@ -21,7 +21,7 @@ class RecipeView {
     <div class="error">
       <div>
         <svg>
-          <use href="${icons}_icon-alert-triangle"></use>
+          <use href="${icons}#icon-alert-triangle"></use>
         </svg>
       </div>
       <p>${message}</p>
@@ -34,7 +34,7 @@ class RecipeView {
     <div class="message">
           <div>
             <svg>
-              <use href="${icons}_icon-smile"></use>
+              <use href="${icons}#icon-smile"></use>
             </svg>
           </div>
           <p>${message}</p>
@@ -47,7 +47,7 @@ class RecipeView {
     const markup = `
     <div class="spinner">
       <svg>
-        <use href="${icons}_icon-loader"></use>
+        <use href="${icons}#icon-loader"></use>
       </svg>
     </div>
   `;
@@ -79,7 +79,7 @@ class RecipeView {
     <div class="recipe__details">
         <div class="recipe__info">
         <svg class="recipe__info-icon">
-            <use href="${icons}_icon-clock"></use>
+            <use href="${icons}#icon-clock"></use>
         </svg>
         <span class="recipe__info-data recipe__info-data--minutes">${
           this._data.cookingTime
@@ -88,7 +88,7 @@ class RecipeView {
         </div>
         <div class="recipe__info">
         <svg class="recipe__info-icon">
-            <use href="${icons}_icon-users"></use>
+            <use href="${icons}#icon-users"></use>
         </svg>
         <span class="recipe__info-data recipe__info-data--people">${
           this._data.servings
@@ -98,12 +98,12 @@ class RecipeView {
         <div class="recipe__info-buttons">
             <button class="btn--tiny btn--increase-servings">
             <svg>
-                <use href="${icons}_icon-minus-circle"></use>
+                <use href="${icons}#icon-minus-circle"></use>
             </svg>
             </button>
             <button class="btn--tiny btn--increase-servings">
             <svg>
-                <use href="${icons}_icon-plus-circle"></use>
+                <use href="${icons}#icon-plus-circle"></use>
             </svg>
             </button>
         </div>
@@ -111,12 +111,12 @@ class RecipeView {
 
         <div class="recipe__user-generated">
         <svg>
-            <use href="${icons}_icon-user"></use>
+            <use href="${icons}#icon-user"></use>
         </svg>
         </div>
         <button class="btn--round">
         <svg class="">
-            <use href="${icons}_icon-bookmark-fill"></use>
+            <use href="${icons}#icon-bookmark-fill"></use>
         </svg>
         </button>
     </div>
@@ -147,7 +147,7 @@ class RecipeView {
         >
         <span>Directions</span>
         <svg class="search__icon">
-            <use href="${icons}_icon-arrow-right"></use>
+            <use href="${icons}#icon-arrow-right"></use>
         </svg>
         </a>
     </div>
@@ -161,7 +161,7 @@ class RecipeView {
     return `
     <li class="recipe__ingredient">
         <svg class="recipe__icon">
-            <use href="${icons}_icon-check"></use>
+            <use href="${icons}#icon-check"></use>
         </svg>
         <div class="recipe__quantity">${new Fraction(
           ingredient.quantity
