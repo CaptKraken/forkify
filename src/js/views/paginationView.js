@@ -34,7 +34,6 @@ class PaginationView extends View {
       this._data.results.length / this._data.resultsPerPage
     );
     const currentPage = this._data.page;
-    console.log(currentPage, numPages);
 
     //page 1 w/ no other page or no result at all
     if (numPages === 1 || numPages <= 0) return "";
