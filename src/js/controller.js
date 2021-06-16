@@ -48,11 +48,12 @@ const controlSearchResults = async function () {
     await model.loadSearchResult(query);
 
     //render results
-    resultsView.render(model.state.search.results);
+    resultsView.render(model.getSearchResultPage(1));
   } catch (error) {}
 };
 
-controlSearchResults();
+// controlSearchResults();
+
 const init = function () {
   recipeView.addHandlerRender(controlRecipe);
   searchView.addHandlerSearch(controlSearchResults);
