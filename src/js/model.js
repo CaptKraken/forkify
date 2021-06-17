@@ -62,7 +62,12 @@ export const updateServings = function (newServings) {
   state.recipe.ingredients.forEach((ingredient) => {
     if (!ingredient.quantity) return;
     const res = (ingredient.quantity * newServings) / state.recipe.servings;
-    ingredient.quantity = res % 2 === 0 ? res : res.toFixed(2);
+
+    const str = res.toString();
+    // if res has ".00", remove it. if not, return res.
+    ingredient.quantity = !str.includes(".00")
+      ? res
+      : Number(str.slice(0, str.indexOf(".00")));
   });
 
   state.recipe.servings = newServings;
