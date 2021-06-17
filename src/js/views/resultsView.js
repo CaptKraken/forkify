@@ -17,7 +17,7 @@ class ResultView extends View {
                 <img src="${result.image}" alt="${result.title}" />
             </figure>
             <div class="preview__data">
-                <h4 class="preview__title">
+                <h4 class="preview__title" title="${result.title} by ${result.publisher}">
                     ${result.title}
                 </h4>
                 <p class="preview__publisher">${result.publisher}</p>
