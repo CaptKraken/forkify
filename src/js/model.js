@@ -1,15 +1,16 @@
-import { async } from "regenerator-runtime";
-import { API_URL, RESULTS_PER_PAGE } from "./config";
-import { getJSON } from "./helpers";
+import { async } from 'regenerator-runtime';
+import { API_URL, RESULTS_PER_PAGE } from './config';
+import { getJSON } from './helpers';
 
 export const state = {
   recipe: {},
   search: {
-    query: "",
+    query: '',
     results: [],
     page: 1,
     resultsPerPage: RESULTS_PER_PAGE,
   },
+  bookmarks: [],
 };
 
 export const loadRecipe = async function (recipeID) {
@@ -27,6 +28,13 @@ export const loadRecipe = async function (recipeID) {
       cookingTime: recipe.cooking_time,
       ingredients: recipe.ingredients,
     };
+
+    state.recipe.bookmarked = state.bookmarks.some(
+      (bookmark) => bookmark.id === state.recipe.id
+    )
+      ? true
+      : false;
+    console.log(state.recipe.bookmarked);
   } catch (error) {
     throw error;
   }
@@ -44,6 +52,8 @@ export const loadSearchResult = async function (query) {
         image: recipe.image_url,
       };
     });
+
+    // state.search.page = 1;
   } catch (error) {
     throw error;
   }
@@ -65,10 +75,25 @@ export const updateServings = function (newServings) {
 
     const str = res.toString();
     // if res has ".00", remove it. if not, return res.
-    ingredient.quantity = !str.includes(".00")
+    ingredient.quantity = !str.includes('.00')
       ? res
-      : Number(str.slice(0, str.indexOf(".00")));
+      : Number(str.slice(0, str.indexOf('.00')));
   });
 
   state.recipe.servings = newServings;
+};
+
+export const addBookmark = function (recipe) {
+  //add bookmark
+  state.bookmarks.push(recipe);
+
+  if ((recipe.id = state.recipe.id)) state.recipe.bookmarked = true;
+};
+export const removeBookmark = function (id) {
+  //removeBookmark
+  const index = state.bookmarks.findIndex((el) => (el.id = id));
+  state.bookmarks.splice(index, 1);
+  console.log(state.bookmarks, id, index);
+
+  if ((id = state.recipe.id)) state.recipe.bookmarked = false;
 };

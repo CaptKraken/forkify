@@ -13,10 +13,6 @@ export default class View {
     this._addToParentEl(markup);
   }
   update(data) {
-    if (!data || (Array.isArray(data) && data.length === 0))
-      return this.renderError();
-    if (JSON.stringify(data) === '{}') return;
-
     this._data = data;
     const newMarkup = this._generateMarkup();
 

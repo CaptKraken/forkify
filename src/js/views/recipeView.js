@@ -1,21 +1,29 @@
-import View from "./View";
-import icons from "url:../../images/icons.svg";
+import View from './View';
+import icons from 'url:../../images/icons.svg';
 
 class RecipeView extends View {
-  _parentEl = document.querySelector(".recipe");
+  _parentEl = document.querySelector('.recipe');
   _errorMessage = `We couldn't find that recipe. Please try another one!`;
-  _message = "";
+  _message = '';
 
   addHandlerRender(handler) {
-    ["hashchange", "load"].forEach((e) => window.addEventListener(e, handler));
+    ['hashchange', 'load'].forEach((e) => window.addEventListener(e, handler));
   }
 
   addHandlerUpdateServings(handler) {
-    this._parentEl.addEventListener("click", (e) => {
-      const btn = e.target.closest(".btn--update-servings");
+    this._parentEl.addEventListener('click', (e) => {
+      const btn = e.target.closest('.btn--update-servings');
       if (!btn) return;
       const { updateTo } = btn.dataset;
       handler(Number(updateTo));
+    });
+  }
+
+  addHandlerAddBookmark(handler) {
+    this._parentEl.addEventListener('click', (e) => {
+      const btn = e.target.closest('.btn--bookmark');
+      if (!btn) return;
+      handler();
     });
   }
 
@@ -72,9 +80,11 @@ class RecipeView extends View {
         <use href="${icons}#icon-user"></use>
         </svg>
         </div>
-        <button class="btn--round">
+        <button class="btn--round btn--bookmark">
         <svg class="">
-            <use href="${icons}#icon-bookmark-fill"></use>
+            <use href="${icons}#icon-bookmark${
+      this._data.bookmarked ? '-fill  ' : ''
+    }"></use>
         </svg>
         </button>
     </div>
@@ -84,7 +94,7 @@ class RecipeView extends View {
         <ul class="recipe__ingredient-list">
         ${this._data.ingredients
           .map((ingredient) => this._generateIngredient(ingredient))
-          .join("")}
+          .join('')}
             
         </ul>
     </div>
@@ -113,7 +123,7 @@ class RecipeView extends View {
   }
   _generateIngredient(ingredient) {
     if (!ingredient.description) return;
-    if (!ingredient.unit) ingredient.unit = "";
+    if (!ingredient.unit) ingredient.unit = '';
 
     return `
     <li class="recipe__ingredient">
@@ -122,7 +132,7 @@ class RecipeView extends View {
         </svg>
         <div class="recipe__quantity">${
           !ingredient.quantity
-            ? (ingredient.quantity = "")
+            ? (ingredient.quantity = '')
             : ingredient.quantity
         }</div>
         <div class="recipe__description">
