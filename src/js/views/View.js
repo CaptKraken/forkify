@@ -5,7 +5,6 @@ export default class View {
   render(data, render = true) {
     if (!data || (Array.isArray(data) && data.length === 0))
       return this.renderError();
-    // console.log(data);
     if (JSON.stringify(data) === '{}') return;
     this._data = data;
     const markup = this._generateMarkup();
@@ -31,7 +30,6 @@ export default class View {
         newEl.firstChild?.nodeValue.trim() != ''
       ) {
         curEl.textContent = newEl.textContent;
-        // console.log(newEl.firstChild?.nodeValue.trim());
       }
 
       //update data attr

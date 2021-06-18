@@ -39,7 +39,7 @@ export const loadRecipe = async function (recipeID) {
   }
 };
 
-export const loadSearchResult = async function (query) {
+export const loadSearchResult = async (query) => {
   try {
     state.search.query = query;
     const data = await getJSON(`${API_URL}?search=${query}`);
@@ -58,7 +58,7 @@ export const loadSearchResult = async function (query) {
   }
 };
 
-export const getSearchResultPage = function (page = state.search.page) {
+export const getSearchResultPage = (page = state.search.page) => {
   state.search.page = page;
   const start = (page - 1) * state.search.resultsPerPage;
   const end = page * state.search.resultsPerPage;
@@ -66,7 +66,7 @@ export const getSearchResultPage = function (page = state.search.page) {
   return state.search.results.slice(start, end);
 };
 
-export const updateServings = function (newServings) {
+export const updateServings = (newServings) => {
   if (newServings <= 0) newServings = 1;
   state.recipe.ingredients.forEach((ingredient) => {
     if (!ingredient.quantity) return;
@@ -82,11 +82,16 @@ export const updateServings = function (newServings) {
   state.recipe.servings = newServings;
 };
 
-export const addBookmark = function (recipe) {
+const persistBookmarks = () => {
+  localStorage.setItem('bookmarks', JSON.stringify(state.bookmarks));
+};
+
+export const addBookmark = (recipe) => {
   //add bookmark
   state.bookmarks.push(recipe);
 
   if ((recipe.id = state.recipe.id)) state.recipe.bookmarked = true;
+  persistBookmarks();
 };
 export const removeBookmark = function (id) {
   //removeBookmark
@@ -94,4 +99,16 @@ export const removeBookmark = function (id) {
   state.bookmarks.splice(index, 1);
 
   if ((id = state.recipe.id)) state.recipe.bookmarked = false;
+  persistBookmarks();
+};
+
+const init = () => {
+  const storage = localStorage.getItem('bookmarks');
+  if (storage) state.bookmarks = JSON.parse(storage);
+};
+
+init();
+
+const clearBookmarks = () => {
+  localStorage.clear('bookmarks');
 };
