@@ -2,13 +2,16 @@ import icons from 'url:../../images/icons.svg';
 
 export default class View {
   _data;
-  render(data) {
+  render(data, render = true) {
     if (!data || (Array.isArray(data) && data.length === 0))
       return this.renderError();
     // console.log(data);
     if (JSON.stringify(data) === '{}') return;
     this._data = data;
     const markup = this._generateMarkup();
+
+    if (!render) return markup;
+
     this._clear();
     this._addToParentEl(markup);
   }
@@ -22,7 +25,6 @@ export default class View {
     const currentElements = Array.from(this._parentEl.querySelectorAll('*'));
     newElements.forEach((newEl, i) => {
       const curEl = currentElements[i];
-
       //update changed text
       if (
         !newEl.isEqualNode(curEl) &&

@@ -34,7 +34,6 @@ export const loadRecipe = async function (recipeID) {
     )
       ? true
       : false;
-    console.log(state.recipe.bookmarked);
   } catch (error) {
     throw error;
   }
@@ -93,7 +92,6 @@ export const removeBookmark = function (id) {
   //removeBookmark
   const index = state.bookmarks.findIndex((el) => (el.id = id));
   state.bookmarks.splice(index, 1);
-  console.log(state.bookmarks, id, index);
 
   if ((id = state.recipe.id)) state.recipe.bookmarked = false;
 };
