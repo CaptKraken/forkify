@@ -1,30 +1,33 @@
-import * as model from "../js/model.js";
-import recipeView from "./views/recipeView.js";
-import searchView from "./views/searchView.js";
-import resultsView from "./views/resultsView.js";
-import paginationView from "./views/paginationView.js";
+import * as model from '../js/model.js';
+import recipeView from './views/recipeView.js';
+import searchView from './views/searchView.js';
+import resultsView from './views/resultsView.js';
+import paginationView from './views/paginationView.js';
 
-import "core-js/stable";
-import "regenerator-runtime/runtime";
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
 // import { slice } from 'core-js/core/array';
 
-const recipeContainer = document.querySelector(".recipe");
-const searchInput = document.querySelector(".search__field");
+const recipeContainer = document.querySelector('.recipe');
+const searchInput = document.querySelector('.search__field');
 
 // https://forkify-api.herokuapp.com/v2
 // 156b8c38-4dae-4e72-bc6f-43025b8945e0
 ///////////////////////////////////////
 
-if (module.hot) {
-  module.hot.accept();
-}
+// if (module.hot) {
+//   module.hot.accept();
+// }
 
 const controlRecipe = async function () {
   try {
     const recipeID = window.location.hash.slice(1);
     if (!recipeID) return; //no id
-
     recipeView.renderSpinner();
+
+    //mark selected search result
+    resultsView.update(model.getSearchResultPage());
+
     //loading recipe
     await model.loadRecipe(recipeID);
     //rendering recipe
@@ -63,7 +66,8 @@ const controlResultPage = (goToPage) => {
 const controlServings = (newServings) => {
   model.updateServings(newServings);
   //update recipe view
-  recipeView.render(model.state.recipe);
+  // recipeView.render(model.state.recipe);
+  recipeView.update(model.state.recipe);
 };
 
 const init = function () {
@@ -75,6 +79,6 @@ const init = function () {
 
 init();
 
-searchInput.addEventListener("input", () => {
+searchInput.addEventListener('input', () => {
   // searchView.getQuery();
 });

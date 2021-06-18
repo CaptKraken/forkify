@@ -1,4 +1,4 @@
-import icons from "url:../../images/icons.svg";
+import icons from 'url:../../images/icons.svg';
 
 export default class View {
   _data;
@@ -6,11 +6,42 @@ export default class View {
     if (!data || (Array.isArray(data) && data.length === 0))
       return this.renderError();
     // console.log(data);
-    if (JSON.stringify(data) === "{}") return;
+    if (JSON.stringify(data) === '{}') return;
     this._data = data;
     const markup = this._generateMarkup();
     this._clear();
     this._addToParentEl(markup);
+  }
+  update(data) {
+    if (!data || (Array.isArray(data) && data.length === 0))
+      return this.renderError();
+    if (JSON.stringify(data) === '{}') return;
+
+    this._data = data;
+    const newMarkup = this._generateMarkup();
+
+    const newDom = document.createRange().createContextualFragment(newMarkup);
+
+    const newElements = Array.from(newDom.querySelectorAll('*'));
+    const currentElements = Array.from(this._parentEl.querySelectorAll('*'));
+    newElements.forEach((newEl, i) => {
+      const curEl = currentElements[i];
+
+      //update changed text
+      if (
+        !newEl.isEqualNode(curEl) &&
+        newEl.firstChild?.nodeValue.trim() != ''
+      ) {
+        curEl.textContent = newEl.textContent;
+        // console.log(newEl.firstChild?.nodeValue.trim());
+      }
+
+      //update data attr
+      if (!newEl.isEqualNode(curEl))
+        Array.from(newEl.attributes).forEach((attr) => {
+          curEl.setAttribute(attr.name, attr.value);
+        });
+    });
   }
 
   renderError(message = this._errorMessage) {
@@ -53,10 +84,10 @@ export default class View {
   }
 
   _clear() {
-    this._parentEl.innerHTML = ""; //removes the message
+    this._parentEl.innerHTML = ''; //removes the message
   }
   _addToParentEl(markup) {
-    this._parentEl.insertAdjacentHTML("afterbegin", markup);
+    this._parentEl.insertAdjacentHTML('afterbegin', markup);
   }
 }
 
