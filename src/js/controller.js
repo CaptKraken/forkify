@@ -40,6 +40,7 @@ const controlRecipe = async function () {
 
     //rendering recipe
     recipeView.render(model.state.recipe);
+    console.log(model.state.recipe);
   } catch (err) {
     recipeView.renderError();
   }
@@ -108,8 +109,18 @@ const controlAddRecipe = async function (newRecipe) {
 
     addRecipeView.renderMessage();
 
+    bookmarksView.render(model.state.bookmarks);
+
+    window.history.pushState(null, '', `#${model.state.recipe.id}`);
+    // window.history.back()
+
     setTimeout(() => {
+      //hide the add recipe window
       addRecipeView.toggleWindow();
+      setTimeout(() => {
+        //reset the add recipe view
+        addRecipeView.reset();
+      }, MODAL_CLOSE_TIMEOUT + 1 * 1000);
     }, MODAL_CLOSE_TIMEOUT * 1000);
   } catch (error) {
     addRecipeView.renderError(error.message);

@@ -75,10 +75,10 @@ class RecipeView extends View {
         </div>
         </div>
 
-        <div class="recipe__user-generated recipe__user-generated-no">
-        <svg>
-        <use href="${icons}#icon-user"></use>
-        </svg>
+        <div class="recipe__user-generated${this._data.key ? '' : ' hidden'}">
+          <svg>
+          <use href="${icons}#icon-user"></use>
+          </svg>
         </div>
         <button class="btn--round btn--bookmark">
         <svg class="">
@@ -133,7 +133,7 @@ class RecipeView extends View {
         <div class="recipe__quantity">${
           !ingredient.quantity
             ? (ingredient.quantity = '')
-            : ingredient.quantity.toFixed(2)
+            : parseFloat(ingredient.quantity.toFixed(2))
         }</div>
         <div class="recipe__description">
         <span class="recipe__unit">${ingredient.unit}</span>
