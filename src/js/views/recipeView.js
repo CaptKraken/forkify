@@ -133,7 +133,7 @@ class RecipeView extends View {
         <div class="recipe__quantity">${
           !ingredient.quantity
             ? (ingredient.quantity = '')
-            : ingredient.quantity
+            : ingredient.quantity.toFixed(2)
         }</div>
         <div class="recipe__description">
         <span class="recipe__unit">${ingredient.unit}</span>
